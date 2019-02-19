@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NotaLembretes</string>
+    <string name="label_titulo">Título</string>
+    <string name="label_descricao">Descrição</string>
 </resources>

@@ -1,7 +1,9 @@
-package br.com.notalembretes;
+package br.com.notalembretes.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import br.com.notalembretes.R;
 
 public class MainActivity extends AppCompatActivity {
 
