@@ -1,16 +1,17 @@
 package br.com.notalembretes.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
 import br.com.notalembretes.R;
-import br.com.notalembretes.dao.NotaDAO;
 import br.com.notalembretes.model.Nota;
-import br.com.notalembretes.util.Constante;
+
+import static br.com.notalembretes.util.Constante.NOTA;
+import static br.com.notalembretes.util.Constante.RESPONSE_CODE;
 
 public class FormularioLembreteActivity extends AppCompatActivity {
 
@@ -47,11 +48,10 @@ public class FormularioLembreteActivity extends AppCompatActivity {
     }
 
     private void gerarResult() {
-        Nota nota = new Nota(edtTitulo.getText().toString(),
-                edtDescricao.getText().toString());
+        Nota nota = new Nota(edtTitulo.getText().toString(), edtDescricao.getText().toString());
         Intent intent = new Intent();
-        intent.putExtra(Constante.NOTA, nota);
-        setResult(Constante.RESPONSE_CODE, intent);
+        intent.putExtra(NOTA, nota);
+        setResult(RESPONSE_CODE, intent);
         finish();
     }
 }

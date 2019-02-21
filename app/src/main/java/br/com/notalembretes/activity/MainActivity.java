@@ -1,27 +1,24 @@
 package br.com.notalembretes.activity;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.Serializable;
-import java.util.List;
-
 import br.com.notalembretes.R;
+import br.com.notalembretes.adapter.NotasAdapter;
 import br.com.notalembretes.dao.NotaDAO;
 import br.com.notalembretes.model.Nota;
-import br.com.notalembretes.adapter.NotasAdapter;
-import br.com.notalembretes.util.Constante;
+
+import static br.com.notalembretes.util.Constante.NOTA;
+import static br.com.notalembretes.util.Constante.REQUEST_CODE;
+import static br.com.notalembretes.util.Constante.RESPONSE_CODE;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rvListaLembretes;
-
-    private List<Nota> notas;
 
     private TextView txtNovaNota;
 
@@ -47,27 +44,34 @@ public class MainActivity extends AppCompatActivity {
         txtNovaNota.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FormularioLembreteActivity.class);
-                startActivityForResult(intent, Constante.REQUEST_CODE);
+                loadFormulario();
             }
         });
     }
 
+    private void loadFormulario() {
+        Intent intent = new Intent(MainActivity.this, FormularioLembreteActivity.class);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
     private void mountNotas() {
-        notas = dao.listAll();
-        adapter = new NotasAdapter(notas, this);
+        adapter = new NotasAdapter(dao.listAll(), this);
         rvListaLembretes.setAdapter(adapter);
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == Constante.REQUEST_CODE && requestCode == Constante.RESPONSE_CODE && data.hasExtra(Constante.NOTA)) {
-            Nota novaNota = (Nota) data.getSerializableExtra(Constante.NOTA);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (isCode(requestCode, REQUEST_CODE) && isCode(requestCode, RESPONSE_CODE) && data.hasExtra(NOTA)) {
+            Nota novaNota = (Nota) data.getSerializableExtra(NOTA);
             new NotaDAO().create(novaNota);
             adapter.add(novaNota);
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private boolean isCode(int requestCode, int requestCode2) {
+        return requestCode == requestCode2;
     }
 }
