@@ -6,15 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <ListView
-        android:id="@+id/listView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_notas"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/lista_notas_insere_nota"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         tools:listitem="@layout/item_nota" />
+    <!-- Usados no RecyclerView para montar uma view com cards que se expandem de acordo com o seu tamanho.
+        app:spanCount="2"
+        app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+         -->
 
     <View android:id="@+id/lista_notas_fundo_gradiente_inferior"
         android:layout_width="0dp"
