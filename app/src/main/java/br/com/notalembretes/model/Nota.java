@@ -1,9 +1,13 @@
 package br.com.notalembretes.model;
 
+import android.content.Intent;
+
+import java.io.Serializable;
+
 /**
  * Created by willans on 20/02/19.
  */
-public class Nota {
+public class Nota implements Serializable {
 
     private String titulo;
     private String descricao;

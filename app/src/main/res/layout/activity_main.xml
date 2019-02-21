@@ -10,7 +10,7 @@
         android:id="@+id/rv_notas"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/lista_notas_insere_nota"
+        app:layout_constraintBottom_toTopOf="@id/txt_nova_nota"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,12 +25,12 @@
         android:layout_width="0dp"
         android:layout_height="5dp"
         android:background="@drawable/fundo_gradiente_insere_nota"
-        app:layout_constraintBottom_toTopOf="@id/lista_notas_insere_nota"
+        app:layout_constraintBottom_toTopOf="@id/txt_nova_nota"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/lista_notas_insere_nota"
+        android:id="@+id/txt_nova_nota"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
