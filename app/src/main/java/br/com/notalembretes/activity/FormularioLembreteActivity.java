@@ -1,5 +1,6 @@
 package br.com.notalembretes.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,6 @@ import br.com.notalembretes.util.Constante;
 import static br.com.notalembretes.util.Constante.NOTA;
 import static br.com.notalembretes.util.Constante.POSICAO_INVALIDA;
 import static br.com.notalembretes.util.Constante.POSITION;
-import static br.com.notalembretes.util.Constante.RESPONSE_CODE;
 
 public class FormularioLembreteActivity extends AppCompatActivity {
 
@@ -70,7 +70,7 @@ public class FormularioLembreteActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra(NOTA, nota);
         intent.putExtra(POSITION, position);
-        setResult(RESPONSE_CODE, intent);
+        setResult(Activity.RESULT_OK, intent);
         finish();
     }
 }

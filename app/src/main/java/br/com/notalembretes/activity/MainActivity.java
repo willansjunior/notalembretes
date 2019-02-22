@@ -1,12 +1,12 @@
 package br.com.notalembretes.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import br.com.notalembretes.R;
 import br.com.notalembretes.adapter.NotasAdapter;
@@ -20,7 +20,6 @@ import static br.com.notalembretes.util.Constante.POSICAO_INVALIDA;
 import static br.com.notalembretes.util.Constante.POSITION;
 import static br.com.notalembretes.util.Constante.REQUEST_CODE;
 import static br.com.notalembretes.util.Constante.REQUEST_CODE_UPDATE;
-import static br.com.notalembretes.util.Constante.RESPONSE_CODE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (isCode(requestCode, REQUEST_CODE) && isCode(resultCode, RESPONSE_CODE) && data.hasExtra(NOTA)) {
+        if (isCode(requestCode, REQUEST_CODE) && isCode(resultCode, Activity.RESULT_OK) && data.hasExtra(NOTA)) {
             Nota novaNota = (Nota) data.getSerializableExtra(NOTA);
             new NotaDAO().create(novaNota);
             adapter.add(novaNota);
         }
 
-        if (isCode(requestCode, REQUEST_CODE_UPDATE) && isCode(resultCode, RESPONSE_CODE)
+        if (isCode(requestCode, REQUEST_CODE_UPDATE) && isCode(resultCode, Activity.RESULT_OK)
                 && data.hasExtra(NOTA) && data.hasExtra(POSITION)) {
             Nota novaNota = (Nota) data.getSerializableExtra(NOTA);
             int position = data.getIntExtra(POSITION, POSICAO_INVALIDA);
