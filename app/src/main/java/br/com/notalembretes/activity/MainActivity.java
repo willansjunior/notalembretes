@@ -41,7 +41,15 @@ public class MainActivity extends AppCompatActivity {
 
         dao = new NotaDAO();
 
+        gerarDados();
+
         mountNotas();
+    }
+
+    private void gerarDados() {
+        for (int i = 0; i < 10; i++) {
+            dao.create(new Nota("Titulo " + i, "Descrição " + i));
+        }
     }
 
     private void initViews() {

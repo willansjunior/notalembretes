@@ -12,7 +12,7 @@ import br.com.notalembretes.dao.NotaDAO;
  */
 public class NotaItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
-    private NotasAdapter adapter;
+    private final NotasAdapter adapter;
 
     public NotaItemTouchHelperCallback(NotasAdapter adapter) {
         this.adapter = adapter;
@@ -21,12 +21,16 @@ public class NotaItemTouchHelperCallback extends ItemTouchHelper.Callback {
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         int marcadorDeslize = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-        return makeMovementFlags(0, marcadorDeslize);
+        int marcacaoArrastar = ItemTouchHelper.DOWN | ItemTouchHelper.UP
+                | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+        return makeMovementFlags(marcacaoArrastar, marcadorDeslize);
     }
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-        return false;
+        new NotaDAO().trade(viewHolder.getAdapterPosition(), viewHolder1.getAdapterPosition());
+        adapter.trade(viewHolder.getAdapterPosition(), viewHolder1.getAdapterPosition());
+        return true;
     }
 
     @Override

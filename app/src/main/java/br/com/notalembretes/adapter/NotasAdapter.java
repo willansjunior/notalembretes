@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Collections;
 import java.util.List;
 
 import br.com.notalembretes.R;
@@ -91,6 +92,11 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.NotasViewHol
 
     public void remove(int position) {
         notas.remove(position);
+        notifyDataSetChanged();
+    }
+
+    public void trade(int adapterPositionStart, int adapterPositionTarget) {
+        Collections.swap(notas, adapterPositionStart, adapterPositionTarget);
         notifyDataSetChanged();
     }
 
