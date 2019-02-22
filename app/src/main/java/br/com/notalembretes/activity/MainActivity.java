@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (isCode(requestCode, REQUEST_CODE) && isCode(requestCode, RESPONSE_CODE) && data.hasExtra(NOTA)) {
+        if (isCode(requestCode, REQUEST_CODE) && isCode(resultCode, RESPONSE_CODE) && data.hasExtra(NOTA)) {
             Nota novaNota = (Nota) data.getSerializableExtra(NOTA);
             new NotaDAO().create(novaNota);
             adapter.add(novaNota);
