@@ -9,14 +9,20 @@ import android.widget.EditText;
 
 import br.com.notalembretes.R;
 import br.com.notalembretes.model.Nota;
+import br.com.notalembretes.util.Constante;
 
 import static br.com.notalembretes.util.Constante.NOTA;
+import static br.com.notalembretes.util.Constante.POSICAO_INVALIDA;
+import static br.com.notalembretes.util.Constante.POSITION;
 import static br.com.notalembretes.util.Constante.RESPONSE_CODE;
 
 public class FormularioLembreteActivity extends AppCompatActivity {
 
+
     private EditText edtTitulo;
     private EditText edtDescricao;
+
+    private int position = POSICAO_INVALIDA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,18 @@ public class FormularioLembreteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formulario_lembrete);
 
         initViews();
+
+        Intent intent = getIntent();
+        if (intent.hasExtra(Constante.NOTA)) {
+            Nota nota = (Nota) intent.getSerializableExtra(Constante.NOTA);
+            position = intent.getIntExtra(POSITION, POSICAO_INVALIDA);
+            montarNota(nota);
+        }
+    }
+
+    private void montarNota(Nota nota) {
+        edtTitulo.setText(nota.getTitulo());
+        edtDescricao.setText(nota.getDescricao());
     }
 
     private void initViews() {
@@ -51,6 +69,7 @@ public class FormularioLembreteActivity extends AppCompatActivity {
         Nota nota = new Nota(edtTitulo.getText().toString(), edtDescricao.getText().toString());
         Intent intent = new Intent();
         intent.putExtra(NOTA, nota);
+        intent.putExtra(POSITION, position);
         setResult(RESPONSE_CODE, intent);
         finish();
     }

@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import br.com.notalembretes.R;
+import br.com.notalembretes.adapter.listener.OnItemClickListener;
 import br.com.notalembretes.model.Nota;
 
 /**
@@ -19,7 +21,9 @@ import br.com.notalembretes.model.Nota;
 public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.NotasViewHolder> {
 
     private List<Nota> notas;
+
     private Context context;
+    private OnItemClickListener onItemClickListener;
 
     public NotasAdapter(List<Nota> notas, Context context) {
         this.notas = notas;
@@ -37,7 +41,7 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.NotasViewHol
     public void onBindViewHolder(@NonNull NotasViewHolder notasViewHolder, int i) {
         Nota nota = notas.get(i);
 
-        notasViewHolder.setNotas(nota);
+        notasViewHolder.vincular(nota);
     }
 
     @Override
@@ -49,11 +53,24 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.NotasViewHol
 
         private final TextView titulo;
         private final TextView descricao;
+        private Nota nota;
 
         public NotasViewHolder(@NonNull View itemView) {
             super(itemView);
             titulo = itemView.findViewById(R.id.item_nota_titulo);
             descricao = itemView.findViewById(R.id.item_nota_descricao);
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onItemClick(nota, getAdapterPosition());
+                }
+            });
+        }
+
+        public void vincular(Nota nota) {
+            this.nota = nota;
+            setNotas(nota);
         }
 
         public void setNotas(Nota nota) {
@@ -65,5 +82,14 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.NotasViewHol
     public void add(Nota nota) {
         notas.add(nota);
         notifyDataSetChanged();
+    }
+
+    public void update(int position, Nota nota) {
+        notas.set(position, nota);
+        notifyDataSetChanged();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }
