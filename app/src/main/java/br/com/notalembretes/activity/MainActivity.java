@@ -88,18 +88,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (isCode(requestCode, REQUEST_CODE) && isCode(resultCode, Activity.RESULT_OK) && data.hasExtra(NOTA)) {
-            Nota novaNota = (Nota) data.getSerializableExtra(NOTA);
-            new NotaDAO().create(novaNota);
-            adapter.add(novaNota);
-        }
+        if (data != null) {
+            if (isCode(requestCode, REQUEST_CODE) && isCode(resultCode, Activity.RESULT_OK) && data.hasExtra(NOTA)) {
+                Nota novaNota = (Nota) data.getSerializableExtra(NOTA);
+                new NotaDAO().create(novaNota);
+                adapter.add(novaNota);
+            }
 
-        if (isCode(requestCode, REQUEST_CODE_UPDATE) && isCode(resultCode, Activity.RESULT_OK)
-                && data.hasExtra(NOTA) && data.hasExtra(POSITION)) {
-            Nota novaNota = (Nota) data.getSerializableExtra(NOTA);
-            int position = data.getIntExtra(POSITION, POSICAO_INVALIDA);
-            new NotaDAO().update(position, novaNota);
-            adapter.update(position, novaNota);
+            if (isCode(requestCode, REQUEST_CODE_UPDATE) && isCode(resultCode, Activity.RESULT_OK)
+                    && data.hasExtra(NOTA) && data.hasExtra(POSITION)) {
+                Nota novaNota = (Nota) data.getSerializableExtra(NOTA);
+                int position = data.getIntExtra(POSITION, POSICAO_INVALIDA);
+                new NotaDAO().update(position, novaNota);
+                adapter.update(position, novaNota);
+            }
         }
 
         super.onActivityResult(requestCode, resultCode, data);
