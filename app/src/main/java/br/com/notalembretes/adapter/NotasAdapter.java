@@ -89,6 +89,11 @@ public class NotasAdapter extends RecyclerView.Adapter<NotasAdapter.NotasViewHol
         notifyDataSetChanged();
     }
 
+    public void remove(int position) {
+        notas.remove(position);
+        notifyDataSetChanged();
+    }
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }

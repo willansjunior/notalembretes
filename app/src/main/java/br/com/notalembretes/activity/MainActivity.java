@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.TextView;
 
 import br.com.notalembretes.R;
 import br.com.notalembretes.adapter.NotasAdapter;
+import br.com.notalembretes.adapter.helper.NotaItemTouchHelperCallback;
 import br.com.notalembretes.adapter.listener.OnItemClickListener;
 import br.com.notalembretes.dao.NotaDAO;
 import br.com.notalembretes.model.Nota;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFormulario();
             }
         });
+
     }
 
     private void loadFormulario() {
@@ -71,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_UPDATE);
             }
         });
-
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new NotaItemTouchHelperCallback(adapter));
+        itemTouchHelper.attachToRecyclerView(rvListaLembretes);
     }
 
     @Override
