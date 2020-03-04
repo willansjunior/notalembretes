@@ -14,8 +14,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_nota" />
+        app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
+        tools:listitem="@layout/item_nota"
+        app:spanCount="2"
+        />
     <!-- Usados no RecyclerView para montar uma view com cards que se expandem de acordo com o seu tamanho.
         app:spanCount="2"
         app:layoutManager="android.support.v7.widget.StaggeredGridLayoutManager"
